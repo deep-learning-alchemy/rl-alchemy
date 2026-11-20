@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+
+runs/
+plots/
+results/
+wandb/
+renders/
+
+.env
+.env.*
+.venv/
+
+MUJOCO_LOG.TXT
+.DS_Store
