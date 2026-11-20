@@ -394,6 +394,7 @@ class Trainer:
         data_seed = cfg.seed if cfg.data_seed is None else cfg.data_seed
         self.run_dir = runs_dir() / cfg.name()
         self.run_dir.mkdir(parents=True, exist_ok=True)
+        (self.run_dir / "DONE").unlink(missing_ok=True)  # a rerun is unfinished until it writes its own
         (self.run_dir / "config.json").write_text(json.dumps(dataclasses.asdict(cfg), indent=2, default=str))
 
         seed_everything(data_seed)

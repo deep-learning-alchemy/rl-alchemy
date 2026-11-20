@@ -127,6 +127,13 @@ def test_init_from_and_kl(tmp_runs):
     assert first["kl_ref"] == pytest.approx(0.0, abs=1e-7)
 
 
+def test_rerun_clears_stale_done(tmp_runs):
+    run_dir = train(PGConfig(run_name="r", **TINY), verbose=False)
+    assert (run_dir / "DONE").exists()
+    Trainer(PGConfig(run_name="r", **TINY), verbose=False)  # a rerun has started but not finished
+    assert not (run_dir / "DONE").exists()
+
+
 def test_stages_order_dependencies():
     a = PGConfig(run_name="a")
     b = PGConfig(run_name="b", kl_ref="a")
